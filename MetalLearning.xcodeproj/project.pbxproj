@@ -13,6 +13,9 @@
 		FAD2FDA426BD06A100B94C32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD2FDA226BD06A100B94C32 /* Main.storyboard */; };
 		FAD2FDA626BD06AA00B94C32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD2FDA526BD06AA00B94C32 /* Assets.xcassets */; };
 		FAD2FDA926BD06AA00B94C32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD2FDA726BD06AA00B94C32 /* LaunchScreen.storyboard */; };
+		FAD2FDB526BD085D00B94C32 /* HomepageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD2FDB326BD085D00B94C32 /* HomepageViewController.swift */; };
+		FAD2FDB626BD085D00B94C32 /* HomepageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAD2FDB426BD085D00B94C32 /* HomepageViewController.xib */; };
+		FAD2FDBB26BD1B1700B94C32 /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = FAD2FDBA26BD1B1700B94C32 /* Shader.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		FAD2FDA526BD06AA00B94C32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAD2FDA826BD06AA00B94C32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAD2FDAA26BD06AA00B94C32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAD2FDB326BD085D00B94C32 /* HomepageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageViewController.swift; sourceTree = "<group>"; };
+		FAD2FDB426BD085D00B94C32 /* HomepageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomepageViewController.xib; sourceTree = "<group>"; };
+		FAD2FDBA26BD1B1700B94C32 /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +62,8 @@
 		FAD2FD9B26BD06A100B94C32 /* MetalLearning */ = {
 			isa = PBXGroup;
 			children = (
+				FAD2FDB926BD1B0600B94C32 /* Shaders */,
+				FAD2FDB226BD082900B94C32 /* HomePage */,
 				FAD2FD9C26BD06A100B94C32 /* AppDelegate.swift */,
 				FAD2FD9E26BD06A100B94C32 /* SceneDelegate.swift */,
 				FAD2FDA026BD06A100B94C32 /* ViewController.swift */,
@@ -65,6 +73,23 @@
 				FAD2FDAA26BD06AA00B94C32 /* Info.plist */,
 			);
 			path = MetalLearning;
+			sourceTree = "<group>";
+		};
+		FAD2FDB226BD082900B94C32 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				FAD2FDB326BD085D00B94C32 /* HomepageViewController.swift */,
+				FAD2FDB426BD085D00B94C32 /* HomepageViewController.xib */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		FAD2FDB926BD1B0600B94C32 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				FAD2FDBA26BD1B1700B94C32 /* Shader.metal */,
+			);
+			path = Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,6 +149,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAD2FDB626BD085D00B94C32 /* HomepageViewController.xib in Resources */,
 				FAD2FDA926BD06AA00B94C32 /* LaunchScreen.storyboard in Resources */,
 				FAD2FDA626BD06AA00B94C32 /* Assets.xcassets in Resources */,
 				FAD2FDA426BD06A100B94C32 /* Main.storyboard in Resources */,
@@ -137,8 +163,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAD2FDB526BD085D00B94C32 /* HomepageViewController.swift in Sources */,
 				FAD2FDA126BD06A100B94C32 /* ViewController.swift in Sources */,
 				FAD2FD9D26BD06A100B94C32 /* AppDelegate.swift in Sources */,
+				FAD2FDBB26BD1B1700B94C32 /* Shader.metal in Sources */,
 				FAD2FD9F26BD06A100B94C32 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
