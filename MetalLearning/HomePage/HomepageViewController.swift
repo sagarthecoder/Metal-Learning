@@ -21,7 +21,7 @@ class HomepageViewController: UIViewController {
         -1,-1,0,
         1,-1,0
     ]
-    var pipeLineState : MTLRenderPipelineState?
+    var pipelineState : MTLRenderPipelineState?
     var vertexBuffer : MTLBuffer?
     
     override func viewDidLoad() {
@@ -57,7 +57,7 @@ class HomepageViewController: UIViewController {
         pipelineDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
         
         do {
-            pipeLineState = try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
+            pipelineState = try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
         } catch {
             print("error = \(error.localizedDescription)")
         }
@@ -71,12 +71,14 @@ extension HomepageViewController : MTKViewDelegate {
     }
     
     func draw(in view: MTKView) {
-        guard let drawable = view.currentDrawable, let descriptor = view.currentRenderPassDescriptor else {
+        guard let drawable = view.currentDrawable, let descriptor = view.currentRenderPassDescriptor, let pipelineState = pipelineState else {
             return
         }
         let commandBuffer = commandQueue.makeCommandBuffer()
         let commandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: descriptor)
-        
+        commandEncoder?.setRenderPipelineState(pipelineState)
+        commandEncoder?.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
+        commandEncoder?.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertices.count)
         commandEncoder?.endEncoding()
         commandBuffer?.present(drawable)
         commandBuffer?.commit()
