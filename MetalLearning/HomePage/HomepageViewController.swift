@@ -23,9 +23,9 @@ class HomepageViewController: UIViewController {
         -1, 1, 0,  //V0
         -1, -1, 0, //V1
         1, -1, 0,  //V2
-        1, -1, 0,  //V3
-        1, 1, 0,   //V4
-        -1, 1, 0   //V5
+        1, -1, 0,  //V2
+        1, 1, 0,   //V3
+        -1, 1, 0   //V0
     ]
     var pipelineState : MTLRenderPipelineState?
     var vertexBuffer : MTLBuffer?
