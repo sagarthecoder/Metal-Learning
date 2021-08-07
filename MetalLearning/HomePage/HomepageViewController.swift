@@ -23,12 +23,25 @@ class HomepageViewController: UIViewController {
         -1, 1, 0,  //V0
         -1, -1, 0, //V1
         1, -1, 0,  //V2
-        1, -1, 0,  //V2
+       // 1, -1, 0,  //V2
         1, 1, 0,   //V3
-        -1, 1, 0   //V0
+       // -1, 1, 0   //V0
     ]
+    
+    var indices : [UInt16] = [
+        0, 1, 2,
+        2, 3, 0
+    ]
+    
+    struct Constants {
+        var animateBy : Float = 0.0
+    }
+    
+    var constants = Constants()
+    var time : Float = 0.0
     var pipelineState : MTLRenderPipelineState?
     var vertexBuffer : MTLBuffer?
+    var indexBuffer : MTLBuffer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +64,7 @@ class HomepageViewController: UIViewController {
     
     private func buildModel() {
         vertexBuffer = device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<Float>.size, options: [])
+        indexBuffer = device.makeBuffer(bytes: indices, length: indices.count *  MemoryLayout<UInt16>.size, options: [])
     }
     
     private func buildPipelineState() {
@@ -77,14 +91,19 @@ extension HomepageViewController : MTKViewDelegate {
     }
     
     func draw(in view: MTKView) {
-        guard let drawable = view.currentDrawable, let descriptor = view.currentRenderPassDescriptor, let pipelineState = pipelineState else {
+        guard let drawable = view.currentDrawable, let descriptor = view.currentRenderPassDescriptor, let pipelineState = pipelineState, let indexBuffer = indexBuffer else {
             return
         }
+        time += (1.0/Float(view.preferredFramesPerSecond))
+        constants.animateBy = abs(sin(time)/2 + 0.5)
+       // print("draw")
         let commandBuffer = commandQueue.makeCommandBuffer()
         let commandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: descriptor)
         commandEncoder?.setRenderPipelineState(pipelineState)
         commandEncoder?.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-        commandEncoder?.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertices.count)
+        commandEncoder?.setVertexBytes(&constants, length: MemoryLayout<Constants>.stride, index: 1)
+       // commandEncoder?.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertices.count)
+        commandEncoder?.drawIndexedPrimitives(type: .triangle, indexCount: indices.count, indexType: .uint16, indexBuffer: indexBuffer, indexBufferOffset: 0)
         commandEncoder?.endEncoding()
         commandBuffer?.present(drawable)
         commandBuffer?.commit()
