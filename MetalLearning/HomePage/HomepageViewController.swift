@@ -7,6 +7,7 @@
 
 import UIKit
 import MetalKit
+import simd
 
 enum Colors {
     static let greenColor = MTLClearColor(red: 0.0, green: 0.4, blue: 0.21, alpha: 1.0)
@@ -16,16 +17,11 @@ class HomepageViewController: UIViewController {
     @IBOutlet weak var metalView: MTKView!
     var device : MTLDevice!
     var commandQueue : MTLCommandQueue!
-    let vertices : [Float] = [
-//        0,1,0,
-//        -1,-1,0,
-//        1,-1,0
-        -1, 1, 0,  //V0
-        -1, -1, 0, //V1
-        1, -1, 0,  //V2
-       // 1, -1, 0,  //V2
-        1, 1, 0,   //V3
-       // -1, 1, 0   //V0
+    var vertices : [Vertex] = [
+        Vertex(position: SIMD3<Float>(-1, 1, 0), color: SIMD4<Float>(1, 0, 0, 1)), // V0
+        Vertex(position: SIMD3<Float>(-1, -1, 0), color: SIMD4<Float>(0, 1, 0, 1)), // V1
+        Vertex(position: SIMD3<Float>(1, -1, 0), color: SIMD4<Float>(0, 0, 1, 1)), // V2
+        Vertex(position: SIMD3<Float>(1, 1, 0), color: SIMD4<Float>(1, 0, 1, 1)) // v3
     ]
     
     var indices : [UInt16] = [
@@ -63,7 +59,7 @@ class HomepageViewController: UIViewController {
     }
     
     private func buildModel() {
-        vertexBuffer = device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<Float>.size, options: [])
+        vertexBuffer = device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<Vertex>.stride, options: [])
         indexBuffer = device.makeBuffer(bytes: indices, length: indices.count *  MemoryLayout<UInt16>.size, options: [])
     }
     
@@ -75,6 +71,18 @@ class HomepageViewController: UIViewController {
         pipelineDescriptor.vertexFunction = vertexFunction
         pipelineDescriptor.fragmentFunction = fragmentFunction
         pipelineDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
+        
+        let vertexDescriptor = MTLVertexDescriptor()
+        vertexDescriptor.attributes[0].format = .float3
+        vertexDescriptor.attributes[0].offset = 0
+        vertexDescriptor.attributes[0].bufferIndex = 0
+        vertexDescriptor.attributes[1].format = .float4
+        vertexDescriptor.attributes[1].offset = MemoryLayout<float3>.stride
+        vertexDescriptor.attributes[1].bufferIndex = 0
+        
+        vertexDescriptor.layouts[0].stride = MemoryLayout<Vertex>.stride
+        
+        pipelineDescriptor.vertexDescriptor = vertexDescriptor
         
         do {
             pipelineState = try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
@@ -101,7 +109,7 @@ extension HomepageViewController : MTKViewDelegate {
         let commandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: descriptor)
         commandEncoder?.setRenderPipelineState(pipelineState)
         commandEncoder?.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-        commandEncoder?.setVertexBytes(&constants, length: MemoryLayout<Constants>.stride, index: 1)
+        //commandEncoder?.setVertexBytes(&constants, length: MemoryLayout<Constants>.stride, index: 1)
        // commandEncoder?.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertices.count)
         commandEncoder?.drawIndexedPrimitives(type: .triangle, indexCount: indices.count, indexType: .uint16, indexBuffer: indexBuffer, indexBufferOffset: 0)
         commandEncoder?.endEncoding()

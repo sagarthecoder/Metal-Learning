@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA9C4D1826C6E05600556CAE /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9C4D1726C6E05600556CAE /* Types.swift */; };
 		FAD2FD9D26BD06A100B94C32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD2FD9C26BD06A100B94C32 /* AppDelegate.swift */; };
 		FAD2FD9F26BD06A100B94C32 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD2FD9E26BD06A100B94C32 /* SceneDelegate.swift */; };
 		FAD2FDA126BD06A100B94C32 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD2FDA026BD06A100B94C32 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA9C4D1726C6E05600556CAE /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		FAD2FD9926BD06A100B94C32 /* MetalLearning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalLearning.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD2FD9C26BD06A100B94C32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD2FD9E26BD06A100B94C32 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA9C4D1626C6E03200556CAE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA9C4D1726C6E05600556CAE /* Types.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		FAD2FD9026BD06A000B94C32 = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +72,7 @@
 		FAD2FD9B26BD06A100B94C32 /* MetalLearning */ = {
 			isa = PBXGroup;
 			children = (
+				FA9C4D1626C6E03200556CAE /* Model */,
 				FAD2FDB926BD1B0600B94C32 /* Shaders */,
 				FAD2FDB226BD082900B94C32 /* HomePage */,
 				FAD2FD9C26BD06A100B94C32 /* AppDelegate.swift */,
@@ -166,6 +177,7 @@
 				FAD2FDB526BD085D00B94C32 /* HomepageViewController.swift in Sources */,
 				FAD2FDA126BD06A100B94C32 /* ViewController.swift in Sources */,
 				FAD2FD9D26BD06A100B94C32 /* AppDelegate.swift in Sources */,
+				FA9C4D1826C6E05600556CAE /* Types.swift in Sources */,
 				FAD2FDBB26BD1B1700B94C32 /* Shader.metal in Sources */,
 				FAD2FD9F26BD06A100B94C32 /* SceneDelegate.swift in Sources */,
 			);
